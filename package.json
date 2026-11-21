@@ -1,0 +1,15 @@
+{
+  "name": "container-reposition-sim",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "周转箱仓点事件重放与调拨策略对照仿真（仅使用 Node.js 内置模块）",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test 'test/**/*.test.js'"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

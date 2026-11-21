@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>周转箱调拨策略仿真 · 事件重放对照</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body class="viz-root">
+  <header class="page-header">
+    <h1>周转箱调拨策略仿真</h1>
+    <p class="subtitle">
+      入箱 / 租借 / 归还分别入流，事件引擎按时间重放；策略只读取当前时刻快照，
+      无法用未来归还弥补当时缺箱。同一需求版本下对照两套调拨规则。
+    </p>
+  </header>
+
+  <section class="toolbar" aria-label="操作区">
+    <button id="btn-baseline" class="action primary" type="button">运行基准策略</button>
+    <button id="btn-late" class="action" type="button">补迟到归还并比较</button>
+    <button id="btn-timeline" class="action" type="button">查看调拨时点</button>
+    <span id="action-status" class="action-status" role="status" aria-live="polite"></span>
+  </section>
+
+  <main class="grid">
+    <!-- ① 基准策略对照：同一事件流上两套规则并排 -->
+    <section class="card evidence-panel" data-evidence-result="baseline-comparison">
+      <div class="card-head">
+        <h2>① 基准策略对照</h2>
+        <span class="evidence-tag">data-evidence-result="baseline-comparison"</span>
+      </div>
+      <div class="placeholder">点击「运行基准策略」后，此处展示两套策略的 KPI 与对照结论。</div>
+      <div class="panel-body" hidden></div>
+    </section>
+
+    <!-- ② 晚到归还对照：同一事件骨架两个版本的受影响时段差异 -->
+    <section class="card evidence-panel" data-evidence-result="late-return-comparison">
+      <div class="card-head">
+        <h2>② 补迟到归还并比较</h2>
+        <span class="evidence-tag">data-evidence-result="late-return-comparison"</span>
+      </div>
+      <div class="placeholder">点击「补迟到归还并比较」后，此处展示晚到归还造成的差异。</div>
+      <div class="panel-body" hidden></div>
+    </section>
+
+    <!-- ③ 调拨时点：每趟调拨的发车/到达时刻与争用裁决 -->
+    <section class="card evidence-panel" data-evidence-result="dispatch-timeline">
+      <div class="card-head">
+        <h2>③ 调拨时点</h2>
+        <span class="evidence-tag">data-evidence-result="dispatch-timeline"</span>
+      </div>
+      <div class="placeholder">点击「查看调拨时点」后，此处展示时间轴与逐趟调拨明细。</div>
+      <div class="panel-body" hidden></div>
+    </section>
+
+    <!-- 样例场景说明（静态展示，便于人工核对输入） -->
+    <section class="card" data-evidence-result="scenario-input">
+      <div class="card-head">
+        <h2>本地样例输入</h2>
+        <span class="evidence-tag">data-evidence-result="scenario-input"</span>
+      </div>
+      <div id="scenario-input" class="panel-body"><p class="muted">加载中…</p></div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>纯 Node.js 内置模块实现 · 无外部服务 · 校验签名（signature）用于核对前后操作数据同源</p>
+  </footer>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
